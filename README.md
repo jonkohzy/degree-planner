@@ -1,6 +1,6 @@
-# Degree Compass — NUS Computer Science AY2025/26
+# Degree Planner — NUS Computer Science AY2025/26
 
-Degree Compass is a personal, browser-local planner for the NUS **Bachelor of Computing (Honours) in Computer Science**.
+This degree planner is a personal side project, a browser-local planner for the NUS **Bachelor of Computing (Honours) in Computer Science**.
 
 It includes only the two views needed for degree planning:
 
