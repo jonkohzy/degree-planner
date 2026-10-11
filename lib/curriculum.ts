@@ -337,6 +337,72 @@ const focusElectiveCodes: Record<FocusArea, string[]> = {
   'Software Engineering': ['CS3203', 'CS3216', 'CS3226', 'CS3234', 'CS3281', 'CS5219', 'CS5232', 'CS5272'],
 };
 
+const focusElectiveTitles: Record<string, string> = {
+  CS3203: 'Software Engineering Project',
+  CS3216: 'Software Product Engineering for Digital Markets',
+  CS3218: 'Multimodal Processing in Mobile Platforms',
+  CS3221: 'Operating Systems Design and Pragmatics',
+  CS3226: 'Web Programming and Applications',
+  CS3233: 'Competitive Programming',
+  CS3234: 'Logic for Proofs and Programs',
+  CS3237: 'Introduction to Internet of Things',
+  CS3240: 'Interaction Design',
+  CS3249: 'Conversational User Interface',
+  CS3281: 'Software Engineering for Evolving Production Systems I',
+  CS4216: 'Constraint Logic Programming',
+  CS4220: 'Knowledge Discovery Methods in Bioinformatics',
+  CS4240: 'Interaction Design for Virtual and Augmented Reality',
+  CS4243: 'Computer Vision and Pattern Recognition',
+  CS4249: 'Quantitative Methods of Human-Computer Interaction',
+  CS4257: 'Algorithmic Foundations of Privacy',
+  CS4261: 'Algorithmic Mechanism Design',
+  CS4268: 'Quantum Computing',
+  CS4269: 'Fundamentals of Logic in Computer Science',
+  CS4276: 'IoT Security',
+  CS4277: '3D Computer Vision',
+  CS4278: 'Intelligent Robots: Algorithms and Systems',
+  CS4344: 'Networked and Mobile Gaming',
+  CS4351: 'Real-time Graphics',
+  CS5214: 'Design of Optimising Compilers',
+  CS5215: 'Constraint Processing',
+  CS5218: 'Principles and Practice of Program Analysis',
+  CS5219: 'Automated Software Validation',
+  CS5222: 'Advanced Computer Architecture',
+  CS5223: 'Distributed Systems',
+  CS5224: 'Cloud Computing',
+  CS5226: 'Database Tuning',
+  CS5228: 'Knowledge Discovery and Data Mining',
+  CS5229: 'Advanced Computer Networks',
+  CS5230: 'Computational Complexity',
+  CS5231: 'Systems Security',
+  CS5232: 'Formal Specification and Design Techniques',
+  CS5234: 'Algorithms at Scale',
+  CS5236: 'Advanced Automata Theory',
+  CS5237: 'Computational Geometry and Applications',
+  CS5238: 'Advanced Combinatorial Methods in Bioinformatics',
+  CS5239: 'Performance Analysis of Computer Systems',
+  CS5240: 'Theoretical Foundations in MultiMedia',
+  CS5241: 'Speech Processing',
+  CS5242: 'Neural Networks and Deep Learning',
+  CS5246: 'Text Mining',
+  CS5248: 'Systems Support for Continuous Media',
+  CS5250: 'Advanced Operating Systems',
+  CS5260: 'Neural Networks and Deep Learning II',
+  CS5272: 'Embedded Software Design',
+  CS5321: 'Network Security',
+  CS5322: 'Database Security',
+  CS5330: 'Randomized Algorithms',
+  CS5331: 'Web Security',
+  CS5332: 'Biometric Authentication',
+  CS5339: 'Theory and Algorithms for Machine Learning',
+  CS5340: 'Uncertainty Modelling in AI',
+  CS5343: 'Advanced Computer Animation',
+  CS5346: 'Information Visualisation',
+  IFS4101: 'Legal Aspects of Information Security',
+  IFS4102: 'Digital Forensics',
+  IFS4103: 'Penetration Testing Practice',
+};
+
 const foundationCodes = new Set(foundationCourses.map((item) => item.code));
 
 const focusCourses: Course[] = Object.entries(focusPrimaries).flatMap(([area, courses]) =>
@@ -354,9 +420,9 @@ const focusCourses: Course[] = Object.entries(focusPrimaries).flatMap(([area, co
 
 const focusElectives: Course[] = Object.entries(focusElectiveCodes).flatMap(([area, codes]) =>
   codes.map((codeValue) =>
-    course(codeValue, 'Approved focus-area elective', ['breadth'], `Focus elective · ${area}`, 4, {
+    course(codeValue, focusElectiveTitles[codeValue], ['breadth'], `Focus elective · ${area}`, 4, {
       focusElective: [area as FocusArea],
-      note: 'Title and availability should be checked in NUSMods; focus electives do not count as Area Primaries.',
+      note: 'Availability and cohort applicability can change; focus electives do not count as Area Primaries.',
     }),
   ),
 );
@@ -416,7 +482,7 @@ function mergeCatalog(items: Course[]) {
     }
     merged.set(item.code, {
       ...existing,
-      title: existing.title === 'Approved focus-area elective' ? item.title : existing.title,
+      title: existing.title,
       tags: [...new Set([...existing.tags, ...item.tags])],
       focusPrimary: [...new Set([...(existing.focusPrimary ?? []), ...(item.focusPrimary ?? [])])],
       focusElective: [...new Set([...(existing.focusElective ?? []), ...(item.focusElective ?? [])])],
